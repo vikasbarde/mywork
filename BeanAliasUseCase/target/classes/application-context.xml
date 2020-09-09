@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<bean id="amazonOrder" class="com.bean.alias.service.model.AmazonOrder">
+		<property name="zipCode" value="7001"/>
+		<property name="products">
+			<list>
+				<value>Iphone</value>
+				<value>Smart Watch</value>
+				<value>Television</value>
+			</list>
+		</property>
+		<property name="address" value="House No. Super E 698 MPPGCL Colony Sarni"/>
+	</bean>
+	
+	<bean id="amazonOrderManager" class="com.bean.alias.service.owner.AmazonOrderManager">
+		<property name="order" ref="amazonOrder"></property>
+		<property name="blueDartCourierServiceImpl" ref="blueDartCourierServiceImpl"></property>
+		<property name="dtdcCourierServiceImpl" ref="dtdcCourierServiceImpl"></property>
+	</bean>
+	
+	
+	<bean id="blueDartService"
+		class="com.bean.alias.service.lossly.couple.BlueDartService"></bean>
+	<bean id="dtdcCourierService"
+		class="com.bean.alias.service.lossly.couple.DtdcCourierService"></bean>
+		
+	<bean id="blueDartCourierServiceImpl" class="com.bean.alias.service.consumer.BlueDartCourierServiceImpl">
+		<property name="blueDartService" ref="blueDartService"></property>
+	</bean>	
+	<alias name="blueDartCourierServiceImpl" alias="dtdcCourierServiceImpl"/>
+	
+	<!-- <bean id="dtdcCourierServiceImpl" class="com.bean.alias.service.consumer.DtdcCourierServiceImpl">
+		<property name="dtdcCourierService" ref="dtdcCourierService"></property>
+	</bean> -->
+
+
+</beans>
